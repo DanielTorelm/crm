@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="se-SV" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Glädjefabriken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400,700|Open+Sans+Condensed:300,700" rel="stylesheet"> 
+  <link rel="stylesheet" href="gladjefabriken.css">
+</head>
+
+<body>
+<style>
+.gf-wrapper {
+  animation-duration: 2s;
+  animation-name: gf-fx-fade;
+}
+
+@keyframes gf-fx-fade {
+  from {
+    opacity: 0; 
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.gf-grid {
+  display: grid;
+  /*justify-content: center;*/
+  grid-template-columns: 1fr; /*grid-template-columns: 1fr 4fr;*/
+  grid-template-rows: auto;
+ 
+  
+}
+
+
+
+
+
+
+.gf-tjanster-img {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.gf-tjanster-output {
+  grid-column: 1;
+  grid-row: 3;
+  box-sizing: border-box;
+  padding-left: var(--padding-large);
+  padding-right: var(--padding-large);
+  padding-bottom: var(--padding-large);
+  
+}
+
+.gf-tjanster-text {
+  grid-column: 1;
+  grid-row: 2;
+  
+  box-sizing: border-box;
+  padding: var(--padding-large);
+ 
+}
+
+button {
+        border: none;
+        box-sizing: border-box;
+        padding: 1rem;
+        background-color: var(--dark1);
+        color: var(--white);
+        border-radius: 6px;
+        margin-bottom: 0.4rem;
+        min-width: 124px;
+        font-size: 1rem;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: var(--maxwhite);
+        color: var(--dark1);
+      }
+
+
+
+@media screen and (max-width: 780px) {
+  .gf-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+
+ 
+}
+  
+
+
+</style>
+  
+<div class="gf-wrapper">
+
+ 
+
+<div class="gf-grid">
+
+  
+  <div class="gf-tjanster-img"><img class="gf-image" style="max-height: 300px; object-fit: cover;" src="img/tjanster.png"></div>
+   
+  <div class="gf-tjanster-text">
+    <h1>Tjänster</h1>
+    <p>Glädjefabriken erbjuder följande tjänster. Denna sida är för tillfället under konstruktion.</p>
+
+      <button class="gf-cursor-pointer" onclick="tjansterEvent('event')">Event</button>&nbsp;&nbsp;
+      <button class="gf-cursor-pointer" onclick="tjansterEvent('forelasning')">Föreläsningar</button>&nbsp;&nbsp;
+      <button class="gf-cursor-pointer" onclick="tjansterEvent('goodwill')">Goodwill</button>&nbsp;&nbsp;
+      <button class="gf-cursor-pointer" onclick="tjansterEvent('produkter')">Produkter</button>
+  
+  </div>
+
+
+  <div class="gf-tjanster-output"></div>
+ 
+      
+      <template class="gf-form-template">
+        <h2>Intresseanmälan</h2>
+        <form action="https://mailthis.to/Daniel79" method="POST" encType="multipart/form-data">
+           <div><label>Namn: <input name="name" type="text" placeholder="Namn (för- och efternamn)"></label></div>
+           <div><label> E-post: * <input required name="email" type="text"></label></div>
+           <div><label>Meddelande: <textarea name="message"></textarea></label></div>
+           <div><button>Skicka</button></div> 
+           <input type="hidden" name="_subject" value="Från Glädjefabriken">
+           <input type="hidden" name="_after" value="www.danieltorelm.se/gladjefabriken/">
+           <input type="hidden" name="_confirmation" value="Tack för din intresseanmälan, du får en återkoppling inom kort. Glada hälsningar från Sandra">
+         </form>
+       </template>
+ 
+</div>
+
+</div>
+
+<script>
+
+
+
+
+function tjansterEvent(event) {
+
+  const outputTarget = document.querySelector('.gf-tjanster-output');
+  const form = document.createElement("gf-contact"); 
+
+  fetch(`tjanster-${event}.html`)
+  .then (function (response) {
+    return response.text();
+  }) 
+  .then(function(content) {
+
+  content += '<hr class="gf-hr"><gf-contact></gf-contact>';
+
+    outputTarget.innerHTML = content;
+    outputTarget.scrollIntoView(); 
+  })
+  .catch(function(error) {
+    console.log('error', error);
+  });
+}
+</script>
+<script src="form.js"></script> 
+</body>
+
+</html>

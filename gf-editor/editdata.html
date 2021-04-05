@@ -1,0 +1,217 @@
+<!doctype html>
+
+<html lang="sv-SE">
+<head>
+  <meta charset="utf-8">
+  <title>GF Editor</title>
+  <meta name="robots" content="noindex">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400,700|Open+Sans+Condensed:300,700" rel="stylesheet">
+  <link rel="stylesheet" href="../gladjefabriken.css">
+</head>
+
+<body>
+    
+<style>
+	.gf-textarea-input {
+		margin-bottom: 1rem;
+		display: block;
+		min-width: 500px;
+		min-height: 160px;
+		padding: 1rem;
+		border: 1px dotted #333;
+	}	
+	.gf-img-src{
+		display: block;
+		margin-bottom: 1rem;
+		transition: background-color 0.2s;
+		border: 1px solid #111;
+		padding: 0.4rem;
+	}
+	.gf-img-src:focus-within{
+		background-color: #eee;
+		
+	}
+	.gf-system-message {
+		background-color: burlywood;
+		box-sizing: border-box;
+		padding: 1rem;
+		display: none;
+	}
+	
+	.gf-headline {
+		font-size: 1.2rem;
+		font-weight: 700;
+		line-height: 2;
+	}
+	.gf-wrapper-edit {
+		box-sizing: border-box;
+		padding: 1rem;
+		transition: background-color 0.2s;
+	}
+	.gf-wrapper-edit:focus-within {
+		background-color: #999;	
+	}
+	.gf-editdata-button {
+		border: 1px solid var(--dark1);
+		background-color: var(--maxwhite);
+		padding: 0.6rem;
+		border-radius: 6px;
+		box-sizing: border-box;
+	}
+	.gf-editdata-button:hover {
+		
+		background-color: var(--dark1);
+		color: var(--maxwhite);
+	}
+</style>
+
+<div class="gf-wrapper" style="box-sizing: border-box; padding: 1rem;">
+
+	<button class="gf-editdata-button gf-cursor-pointer" onclick="saveData()">Spara</button>	
+	
+
+	<!-- for text -->    
+	<div id="test"></div>	
+
+	<hr>
+
+	<!-- for images -->
+	<div id="test2"></div>
+		
+		
+	<button class="gf-editdata-button gf-cursor-pointer" onclick="saveData()">Spara</button>	
+	<div class="gf-system-message"></div>
+
+</div>
+	
+<script>
+
+
+
+function saveData() {
+	//var dataStore = JSON.parse(dataStore);
+	console.log('dataStore', dataStore);
+	// Text
+	let getDataTosave = document.querySelectorAll('#test > div');
+	console.log('getDataTosave', getDataTosave);
+	let elements = document.querySelectorAll(".gf-wrapper-edit");
+	for (const element of elements) {
+		element.classList.remove('gf-wrapper-edit');
+  		console.log(element);
+	};
+
+	
+	getDataTosave.forEach(headline => {
+		let id = headline.className;
+		let textAreaValue = headline.querySelector('.gf-textarea-input').value;
+		dataStore.text[id] = textAreaValue;
+		
+	});
+	
+	// Images
+	let getDataTosave2 = document.querySelectorAll('#test2 > div');
+	getDataTosave2.forEach(image => {
+		let id = image.className;
+		let imgSrcValue = image.querySelector('.gf-img-src').value;
+		dataStore.img[id] = imgSrcValue;
+	});
+	
+	
+	// Save data by calling php page with code to write data, the php page saves 2 files, one for read and one for read/write.
+	const dataStoreTestString = JSON.stringify(dataStore, null, 4).replace(/\\"/g, '"');
+	console.log('dataStoreTestString', dataStoreTestString);
+	
+	// Posting and saving data in json
+	fetch('saveData.php', {
+	method: 'POST',
+	body: `${dataStoreTestString}`,
+	headers: {
+		'Content-Type': 'text/javascript'
+	},
+	}).then(function() { 
+		alert('Data sparat');
+		/*let message = document.querySelector('.gf-system-message');
+		message.innerHTML = 'Data sparat'; 
+		message.style = 'display: block; margin-bottom: 1rem; margin-top: 1rem;';*/
+	});
+	
+};
+	
+</script>	
+
+
+<script>
+
+
+async function getDatastore() {
+    const response = await fetch('../datastore.json');
+    const json = await response.json();
+    return json;
+};
+
+// Need to wrap main in an async function to be able to call await
+async function main() {
+	const dataStore = await getDatastore();
+	
+	
+	// TEXT
+	for (let property in dataStore.text) {
+  //console.log(`${property}: ${dataStore.text[property]}`);
+	
+	let newWrapper = document.createElement('div');
+	newWrapper.classList.add(property);
+	newWrapper.classList.add('gf-wrapper-edit');
+	let newHeadline = document.createElement('span');
+	newHeadline.classList.add('gf-headline');
+	newHeadline.textContent = property;
+	
+	let inputText = document.createElement('textarea');
+	inputText.classList.add('gf-textarea-input');
+	let textData = dataStore.text[property];
+	inputText.value = textData;
+	
+	newWrapper.appendChild(newHeadline);
+	newWrapper.appendChild(inputText);
+	
+	
+	document.querySelector('#test').appendChild(newWrapper.cloneNode(true));
+	
+};
+
+	// IMAGES
+	for (let property in dataStore.img) {
+	let newWrapper = document.createElement('div');
+	newWrapper.classList.add(property);
+	
+	let newTitle = document.createElement('span');
+	newTitle.classList.add('gf-headline');
+	newTitle.textContent = property;
+	
+	let newImgSrc = document.createElement('input');
+	newImgSrc.classList.add('gf-img-src');
+	newImgSrc.value = dataStore.img[property];
+
+	newWrapper.appendChild(newTitle);
+	newWrapper.appendChild(newImgSrc);
+	
+	document.querySelector('#test2').appendChild(newWrapper.cloneNode(true));
+}
+
+// exporting so we can run savedata
+window.dataStore = dataStore;
+}
+
+// Run our program
+main();
+
+
+
+	
+
+	
+</script>	
+	
+</body>
+</html>
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="se-SV" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+  <title>GF Editor module</title>
+  <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="gladjefabriken.css">
+</head>
+
+<body>
+ 
+<div class="gf-main" contenteditable>
+
+
+  
+</div>
+<button class="gf-editdata-button gf-cursor-pointer" onclick="saveData()">Spara</button>
+
+</body>
+<script>
+function insertCustomElements(input = 'index-modules.html') {
+	fetch(`/${input}`)
+    .then(response => response.text())
+    .then(data => document.querySelector('.gf-main').innerText = data);
+    //.then(data => document.querySelector('.gf-main').innerText = data);
+};
+insertCustomElements();
+
+
+function saveData() {
+  const dataToSave = document.querySelector('.gf-main');
+  const dataToSaveStringed = dataToSave.innerText;
+  // Posting and saving data in json
+
+  fetch('editPageStructure.php', {
+    method: 'POST',
+    body: `${dataToSaveStringed}`,
+    headers: {
+      'Content-Type': 'text/html'
+    },
+    }).then(function() { 
+      alert('Data sparat');
+    });
+};
+</script>
+</html>

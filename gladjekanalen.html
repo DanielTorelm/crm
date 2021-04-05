@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="se-SV" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Glädjefabriken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400|Open+Sans+Condensed:300,700" rel="stylesheet"> 
+  <link rel="stylesheet" href="gladjefabriken.css">
+</head>
+
+<body>
+<style>
+.gf-wrapper {
+  animation-duration: 2s;
+  animation-name: gf-fx-fade;
+}
+
+@keyframes gf-fx-fade {
+  from {
+    opacity: 0; 
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.gf-logo-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+
+
+.gf-logo-text {
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+  place-self: center;
+  max-width: 800px;
+  margin-bottom: var(--margin-bottom1);
+  
+}
+
+
+  
+@media screen and (max-width: 780px) {
+    .gf-logo-grid {
+    padding: 1rem;
+  }
+
+ 
+  }
+
+</style>
+  
+<div class="gf-wrapper">
+  <gf-panel order="row" text="text10" template="onlyText"></gf-panel>
+  <gf-flex>
+    <div slot="flex-item">
+      <a href="https://www.instagram.com/gladjefabriken/" target="_blank">
+      <img style="width: 64px;" src="img/icon-instagram.svg" alt="bild"></a></div>
+    <div slot="flex-item"> 
+      <a href="https://www.youtube.com/channel/UC0UR1gQMn4ikMt2rzyvrZhQ" target="_blank">
+      <img style="width: 64px;" src="img/icon-youtube.svg" alt="bild"></a></div>
+  </gf-flex>
+  <gf-panel order="row" image="img10" template="onlyImage"></gf-panel> 
+</div>
+
+</body>
+<script type="module" src="module1-2.js"></script>
+<script type="module" src="flex-module.js"></script>
+</html>

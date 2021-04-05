@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="se-SV" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Glädjefabriken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400|Open+Sans+Condensed:300,700" rel="stylesheet"> 
+  <link rel="stylesheet" href="gladjefabriken.css">
+</head>
+
+<body>
+  <style>
+    .gf-tjanster-grid {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows; auto;
+    min-height: 800px;
+    background-color: pink;
+    gap: 10px;
+    max-width: 1900px;
+    
+    }
+    
+    .gf-tjanster-grid_menu {
+    background-color:forestgreen;
+    grid-column: 1 / 1;
+    grid-row: 1 / 2;
+    place-self: start center;
+    }
+    .gf-tjanster-grid_image {
+    background-color: aqua;
+    grid-column: 2 / 2;
+    grid-row: 1 / 1;
+    place-self: stretch;
+    }
+    
+    .gf-tjanster-grid_image img {
+          width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .gf-tjanster-grid_text {
+    background-color: darkviolet;
+    grid-column: 2 / 2;
+    grid-row: 2 / 2;
+    place-self: start center;
+    
+    }
+    </style>
+       
+    <div class="gf-tjanster-grid">
+    
+      <div class="gf-tjanster-grid_menu">
+        <a href="#" onclick="tjansterEvent('event')">Event</a><br>
+        <a href="#" onclick="tjansterEvent('forelasning')">Föreläsningar</a><br>
+        <a href="#" onclick="tjansterEvent('goodwill')">Goodwill</a><br>
+        <a href="#" onclick="tjansterEvent('produkter')">Produkter</a>
+      </div>
+
+
+      <div class="gf-tjanster-grid_image"><img src="img.jpg" alt="bild"></div>
+      
+      <div class="gf-tjanster-grid_text">
+        <div class="gf-tjanster-output">
+
+        </div>
+      If your definition contains repeating parts, you can use the repeat() notation to streamline things:
+      </div>
+    
+    </div>
+
+     
+    <template class="gf-form-template">
+      <h2>Intresseanmälan</h2>
+      <form action="https://mailthis.to/Daniel79" method="POST" encType="multipart/form-data">
+         <div><label>Namn: <input name="name" type="text" placeholder="Namn (för- och efternamn)"></label></div>
+         <div><label> E-post: * <input required name="email" type="text"></label></div>
+         <div><label>Meddelande: <textarea name="message"></textarea></label></div>
+         <div><button>Skicka</button></div> 
+         <input type="hidden" name="_subject" value="Från Glädjefabriken">
+         <input type="hidden" name="_after" value="www.danieltorelm.se/gladjefabriken/">
+         <input type="hidden" name="_confirmation" value="Tack för din intresseanmälan, du får en återkoppling inom kort. Glada hälsningar från Sandra">
+       </form>
+     </template>
+
+    <script src="form.js"></script>
+    <script>
+    window.onload = tjansterEvent('start');
+
+
+function tjansterEvent(event) {
+  
+  //var test = document.querySelector("#gf-tjanster-output");
+  //console.log(test);
+  const outputTarget = document.querySelector('.gf-tjanster-output');
+  const form = document.createElement("gf-contact"); 
+
+  fetch(`tjanster-${event}.html`)
+  .then (function (response) {
+    return response.text();
+  }) 
+  .then(function(content) {
+    
+   /* let parser = new DOMParser();
+    let doc = parser.parseFromString(content, 'text/html');
+    let content2 = doc.querySelector('.gf-wrapper');
+    content2.string();*/
+	//var content = doc.querySelector('body');
+  //console.log(content);
+  content += '<hr class="gf-hr"><gf-contact></gf-contact>';
+  console.log(content);
+    //outputTarget.insertAdjacentHTML('afterbegin', content);
+    outputTarget.innerHTML = content;
+  })
+  .catch(function(error) {
+    console.log('error', error);
+  });
+}
+    </script> 
+</body>
+
+</html>

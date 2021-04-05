@@ -1,0 +1,223 @@
+﻿:root {
+  --white: #F2EFEB;
+  --maxwhite: #fff;
+  --padding-large: 3rem;
+  --dark1: rgba(50,50,50,1);
+  --grey1: #ddd;
+  --margin-bottom1: 1rem;
+  --displayNone: none;
+  --displayBlock: block;
+  --headingColor: #434348;
+  --gf-smalltext: 0.65rem;
+}
+
+body, textarea, button {
+  font-family: 'M PLUS Rounded 1c', serif;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--dark1);
+  background-color: var(--white);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 17px;
+}
+
+b {
+font-weight: bold;
+}
+
+/* Helpers */
+.gf-paragraph-after-margin {
+  margin-bottom: 4rem;
+}
+
+.gf-padding {
+  box-sizing: border-box;
+  padding: var(--padding-large);
+}
+
+.gf-image {
+  width: 100%;
+  max-width: 1900px;
+  vertical-align: top;
+  }
+
+.gf-smalltext {
+  font-size: 0.8rem;
+}
+
+.gf-align-left {
+  text-align: left;
+}
+
+.gf-cite-source {
+  font-weight: 300;
+}
+
+.gf-cite-source::before {
+  content: '-';
+}
+
+.gf-cursor-pointer:hover {
+  cursor: pointer;
+}
+
+.gf-wrapper {
+  animation-duration: 1s;
+  animation-name: gf-fx-fade;
+}
+
+@keyframes gf-fx-fade {
+  from {
+    opacity: 0; 
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* END Helpers */
+
+.gf-hr {
+  color: var(--grey1);
+  border: 0;
+  height: 2px;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+h1, h2, h3 {
+  font-family: 'Open Sans Condensed', sans-serif; 
+  font-style: normal;
+  font-weight: 700;
+  margin-top: 0;
+  padding-top: 0;
+  color: var(--headingColor);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-style: normal;
+}
+
+h2 {
+  font-size: 1.9rem;
+  font-style: normal;
+}
+
+
+
+.gf-logo {
+ position: relative;
+  top: 6px; /*bad plz layout this better*/
+  max-height: 60px;
+ 
+}
+
+  
+.gf-svg-icon-wrapper {
+  vertical-align: top;
+}
+
+.social-icons{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1.4rem;
+	
+  }
+  
+  .social-icon{
+	width: 70px;
+	margin-right: 1.6rem;
+	
+  }
+
+
+
+/* Links */
+
+/** nav links **/
+
+nav a:link {
+  color: var(--white1);
+  text-decoration: none;
+  opacity: 1;
+}
+
+
+nav a:visited {
+  color: var(--white1);;
+}
+
+
+nav a:hover {
+  color: var(--white1);
+  text-decoration: none;
+  
+}
+
+nav a:active {
+  color: var(--white1);
+} 
+
+
+/** normal links **/
+a:link {
+  color: currentColor;
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+
+a:visited {
+  color: currentColor;
+}
+
+
+a:hover {
+  color: currentColor;
+  text-decoration: none;
+  
+}
+
+a:active {
+  color: #fff;
+} 
+
+
+
+
+
+
+
+  
+
+/* at media*/
+
+@media screen and (max-width: 780px) {
+    
+  
+  h1, h2 {
+    line-height: 1.2;
+  }
+  
+
+  .gf-flexbox-wrapper{
+    padding: 0.8rem;
+  }
+  
+  .gf-padding {
+    padding: 0.8rem;
+}
+  
+.gf-section-video-text {
+  padding: 0 0.8rem;
+}  
+    
+ 
+  }

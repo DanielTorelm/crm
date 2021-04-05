@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="se-SV" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Glädjefabriken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400|Open+Sans+Condensed:300,700" rel="stylesheet"> 
+  <link rel="stylesheet" href="gladjefabriken.css">
+</head>
+
+<body>
+<style>
+.gf-wrapper {
+  animation-duration: 2s;
+  animation-name: gf-fx-fade;
+}
+
+@keyframes gf-fx-fade {
+  from {
+    opacity: 0; 
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.gf-logo-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+  .gf-flexbox-container {
+    grid-row: 2 / 2;
+    grid-column: 1 / 1;
+    justify-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 800px;
+    
+}
+
+.gf-logo-text {
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+  place-self: center;
+  max-width: 800px;
+  margin-bottom: var(--margin-bottom1);
+  
+}
+
+.gf-flexbox-container div {
+    width: 240px;
+    /*max-width: 600px;*/
+    min-height: 100px;
+    background-color: pink;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s;
+}
+
+.gf-flexbox-container div:hover {
+  transform: translateY(-11px);
+  filter: drop-shadow(0 0 0.75rem var(--dark1));
+  cursor: pointer;
+}
+  
+@media screen and (max-width: 780px) {
+    .gf-logo-grid {
+    padding: 1rem;
+  }
+
+ 
+  }
+
+</style>
+  
+<div class="gf-wrapper">
+
+  <gf-panel order="row" text="text9" template="onlyText" bg-color="grey1"></gf-panel>
+  <gf-panel order="row" image="img9" template="onlyImage" bg-color="white"></gf-panel>
+
+</div>
+<script type="module" src="module1-2.js"></script>
+</body>
+
+</html>

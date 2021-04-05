@@ -1,0 +1,6 @@
+User-agent: * 
+Disallow: /gf-editor/
+Disallow: /datastore.js
+Disallow: datastore.js
+Disallow: datastore.json
+Disallow: /img
